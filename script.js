@@ -103,8 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
         retina_detect: true
     });
 
-    // Set the wedding date - November 23, 2025
-    const weddingDate = new Date('November 23, 2025 00:00:00').getTime();
+    // Set the wedding date - November 26, 2025
+    const weddingDate = new Date('November 26, 2025 00:00:00').getTime();
 
     // Update the countdown every second
     const countdown = setInterval(() => {
