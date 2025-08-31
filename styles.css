@@ -1,0 +1,448 @@
+:root {
+    --primary-color: #ff9580;
+    --secondary-color: #4b6cb7;
+    --background-color: #faf7f2;
+    --text-color: #333;
+    --accent-color: #182848;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.particles-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+main {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.content-container {
+    max-width: 800px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 4rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    animation: fadeIn 1.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap; /* Prevent line breaks */
+}
+
+.wedding-info {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.location-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+}
+
+.location-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+    color: var(--primary-color);
+}
+
+.location {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.date-container {
+    margin-bottom: 3rem;
+}
+
+.date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+}
+
+.date::before, .date::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 60px;
+    background: var(--text-color);
+    top: 50%;
+    opacity: 0.4;
+}
+
+.date::before {
+    left: -80px;
+}
+
+.date::after {
+    right: -80px;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--accent-color);
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.countdown-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+}
+
+.couple-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.invitation-link {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.invitation-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,149,128,0.3);
+    letter-spacing: 1px;
+}
+
+.invitation-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255,149,128,0.4);
+    filter: brightness(1.1);
+}
+
+.invitation-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profession-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.profession-icon:hover {
+    transform: scale(1.2);
+    color: var(--primary-color);
+}
+
+.profession {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.ampersand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.bee-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--accent-color);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.bee-icon:hover {
+    transform: scale(1.2);
+}
+
+.flying-bee {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(0 0 2px rgba(255, 193, 7, 0.5));
+    transform-origin: center;
+}
+
+.glitter {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, rgba(255,213,79,1) 0%, rgba(255,193,7,0.6) 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99;
+    box-shadow: 0 0 3px rgba(255, 213, 79, 0.8);
+}
+
+.special-sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, rgba(255,213,79,1) 0%, rgba(255,193,7,0.8) 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99;
+    box-shadow: 0 0 8px rgba(255, 213, 79, 0.9);
+    transform-origin: center;
+}
+
+#glitter-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 1;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+/* Shake animation for when the bee limit is reached */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake-animation {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        padding: 2.5rem;
+    }
+    
+    .names {
+        font-size: 3.5rem;
+    }
+    
+    .countdown-container {
+        gap: 1rem;
+    }
+    
+    .countdown-value {
+        font-size: 2.5rem;
+    }
+    
+    .countdown-label {
+        font-size: 0.7rem;
+    }
+    
+    .profession-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .couple-info {
+        gap: 2rem;
+    }
+    
+    .ampersand {
+        font-size: 2rem;
+    }
+    
+    .bee-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .flying-bee {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-container {
+        padding: 2rem 1.5rem;
+    }
+    
+    .names {
+        font-size: 2.5rem;
+        white-space: nowrap;
+    }
+    
+    .wedding-info {
+        font-size: 1rem;
+    }
+    
+    .countdown-container {
+        gap: 0.7rem;
+    }
+    
+    .countdown-value {
+        font-size: 2rem;
+    }
+    
+    .date::before, .date::after {
+        width: 30px;
+    }
+    
+    .date::before {
+        left: -40px;
+    }
+    
+    .date::after {
+        right: -40px;
+    }
+    
+    .couple-info {
+        gap: 1.5rem;
+    }
+    
+    .profession-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .ampersand {
+        font-size: 1.8rem;
+    }
+    
+    .content-container {
+        max-width: 100%;
+        margin: 0 15px;
+    }
+    
+    .bee-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .flying-bee {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 380px) {
+    .content-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .names {
+        font-size: 2rem;
+    }
+    
+    .wedding-info {
+        font-size: 0.9rem;
+    }
+    
+    .countdown-container {
+        gap: 0.5rem;
+    }
+    
+    .countdown-value {
+        font-size: 1.8rem;
+    }
+    
+    .countdown-label {
+        font-size: 0.6rem;
+    }
+} 
