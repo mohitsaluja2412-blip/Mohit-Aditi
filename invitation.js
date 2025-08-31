@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         localStorage.setItem('rsvpData', JSON.stringify(data));
 
-        fetch('YOUR_WEB_APP_URL_HERE', {
+        fetch('https://script.google.com/macros/library/d/1S4mmjwW9UvO3qGkNbR4AF5_CnhEwNHktfX90t7gKhz3B4yJ7-nUVx4U8/1', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
