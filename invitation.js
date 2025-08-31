@@ -157,43 +157,123 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(createFloatingHeart, heartInterval);
 
     // RSVP button interactions
-    const rsvpButtons = document.querySelectorAll('.rsvp-btn');
-    rsvpButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            rsvpButtons.forEach(btn => btn.classList.remove('rsvp-active'));
-            
-            // Add active class to clicked button
-            this.classList.add('rsvp-active');
-            
-            // Show feedback
-            const feedback = document.createElement('div');
-            feedback.style.position = 'fixed';
-            feedback.style.top = '50%';
-            feedback.style.left = '50%';
-            feedback.style.transform = 'translate(-50%, -50%)';
-            feedback.style.background = 'rgba(255, 255, 255, 0.95)';
-            feedback.style.padding = '20px 30px';
-            feedback.style.borderRadius = '15px';
-            feedback.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
-            feedback.style.zIndex = '10000';
-            feedback.style.textAlign = 'center';
-            feedback.style.fontFamily = 'Montserrat, sans-serif';
-            feedback.style.animation = 'fadeInScale 0.3s ease-out';
-            
-            if (this.classList.contains('attending')) {
-                feedback.innerHTML = `
-                    <div style="font-size: 2rem; margin-bottom: 10px;">🎉</div>
-                    <div style="font-size: 1.2rem; font-weight: 500; color: #333;">Wonderful!</div>
-                    <div style="font-size: 1rem; color: #666; margin-top: 5px;">We can't wait to celebrate with you!</div>
-                `;
-            } else {
-                feedback.innerHTML = `
-                    <div style="font-size: 2rem; margin-bottom: 10px;">💝</div>
-                    <div style="font-size: 1.2rem; font-weight: 500; color: #333;">We understand</div>
-                    <div style="font-size: 1rem; color: #666; margin-top: 5px;">You'll be in our hearts on our special day!</div>
-                `;
-            }
+    document.addEventListener('DOMContentLoaded', function () {
+    const rsvpForm = document.getElementById('rsvp-form');
+    const notAttendingBtn = document.querySelector('.not-attending');
+
+    // Handle form submission for "I'll be there"
+    rsvpForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('full-name').value.trim();
+        const side = document.getElementById('side').value;
+        const guests = document.getElementById('guests').value;
+        const rsvp = 'attending';
+
+        if (!name || !side || !guests) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        const data = {
+            name,
+            side,
+            guests,
+            rsvp
+        };
+
+        // Store in localStorage
+        localStorage.setItem('rsvpData', JSON.stringify(data));
+
+        // Send to Google Sheets
+        fetch('https://script.google.com/macros/library/d/1S4mmjwW9UvO3qGkNbR4AF5_CnhEwNHktfX90t7gKhz3B4yJ7-nUVx4U8/1', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.text())
+        .then(res => {
+            showConfirmationPopup('attending');
+            rsvpForm.reset();
+        })
+        .catch(err => {
+            console.error('RSVP error:', err);
+            alert("There was a problem submitting your RSVP.");
+        });
+    });
+
+    // Handle "Can't make it"
+    notAttendingBtn.addEventListener('click', function () {
+        const name = document.getElementById('full-name').value.trim() || "No name";
+        const side = document.getElementById('side').value || "No side";
+        const guests = 0;
+        const rsvp = 'not-attending';
+
+        const data = {
+            name,
+            side,
+            guests,
+            rsvp
+        };
+
+        localStorage.setItem('rsvpData', JSON.stringify(data));
+
+        fetch('YOUR_WEB_APP_URL_HERE', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.text())
+        .then(res => {
+            showConfirmationPopup('not-attending');
+            rsvpForm.reset();
+        })
+        .catch(err => {
+            console.error('RSVP error:', err);
+            alert("There was a problem submitting your RSVP.");
+        });
+    });
+
+    // Confirmation Popup Function
+    function showConfirmationPopup(status) {
+        const feedback = document.createElement('div');
+        feedback.style.position = 'fixed';
+        feedback.style.top = '50%';
+        feedback.style.left = '50%';
+        feedback.style.transform = 'translate(-50%, -50%)';
+        feedback.style.background = 'rgba(255, 255, 255, 0.95)';
+        feedback.style.padding = '20px 30px';
+        feedback.style.borderRadius = '15px';
+        feedback.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+        feedback.style.zIndex = '10000';
+        feedback.style.textAlign = 'center';
+        feedback.style.fontFamily = 'Montserrat, sans-serif';
+
+        if (status === 'attending') {
+            feedback.innerHTML = `
+                <div style="font-size: 2rem; margin-bottom: 10px;">🎉</div>
+                <div style="font-size: 1.2rem; font-weight: 500; color: #333;">You're in!</div>
+                <div style="font-size: 1rem; color: #666; margin-top: 5px;">Thank you for your RSVP.</div>
+            `;
+        } else {
+            feedback.innerHTML = `
+                <div style="font-size: 2rem; margin-bottom: 10px;">💝</div>
+                <div style="font-size: 1.2rem; font-weight: 500; color: #333;">We'll miss you</div>
+                <div style="font-size: 1rem; color: #666; margin-top: 5px;">Thanks for letting us know.</div>
+            `;
+        }
+
+        document.body.appendChild(feedback);
+
+        setTimeout(() => {
+            feedback.style.opacity = '0';
+            feedback.style.transform = 'translate(-50%, -50%) scale(0.9)';
+            setTimeout(() => {
+                feedback.remove();
+            }, 300);
+        }, 2500);
+    }
+});
             
             document.body.appendChild(feedback);
             
